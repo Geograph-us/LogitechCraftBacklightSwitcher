@@ -8,7 +8,7 @@ This program just toggle backlight checkbox in LogitechOptions. For it using [Wh
 **Command line:**
 - On - turn on backlight
 - Off - turn off backlight
-- <empty> - toggle backlight
+- [empty] - toggle backlight
 
   
 **settings.ini**
