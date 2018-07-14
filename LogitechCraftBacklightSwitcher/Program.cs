@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using White.Core;
+using White.Core.Configuration;
 using White.Core.Factory;
 using White.Core.UIItems;
 using White.Core.UIItems.Finders;
@@ -19,7 +20,7 @@ namespace LogitechCraftBacklightSwitcher
         static string LogiOptionsUiArguments = "devid:6b350";
         static string CheckBoxAutomationId = "BacklightingCheckBox";
         static string MainWindowName = "Logitech Options";
-        static int Timeout = 10000;
+        static int Timeout = 15000;
 
         static int Main(string[] args)
         {
@@ -46,9 +47,10 @@ namespace LogitechCraftBacklightSwitcher
             }
 
             var startInfo = new ProcessStartInfo(LogiOptionsUiExe) { Arguments = LogiOptionsUiArguments };
-
+            startInfo.WindowStyle = ProcessWindowStyle.Minimized;
             try
             {
+                CoreAppXmlConfiguration.Instance.BusyTimeout = Timeout;
                 using (var application = Application.AttachOrLaunch(startInfo))
                 {
                     using (var mainWindow = application.GetWindow(SearchCriteria.ByText(MainWindowName), InitializeOption.NoCache))
